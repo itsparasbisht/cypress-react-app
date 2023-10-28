@@ -1,14 +1,22 @@
 describe("fundamentals test", () => {
-  it("contains correct header", () => {
+  beforeEach(() => {
     cy.visit("/fundamentals");
-    cy.get('[data-test="fundamentals-header"]').should(
+  });
+
+  it("contains correct header", () => {
+    // cy.get('[data-test="fundamentals-header"]').should(
+    //   "contain.text",
+    //   "Testing Fundamentals"
+    // );
+
+    // using a custom selector function defined inside support directory
+    cy.getDataTest("fundamentals-header").should(
       "contain.text",
       "Testing Fundamentals"
     );
   });
 
-  it("accordian works correctly", () => {
-    cy.visit("/fundamentals");
+  it("accordion works correctly", () => {
     cy.contains(/Your tests will exist in a describe block/i).should(
       "not.be.visible"
     );
